@@ -7,6 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import GradientBoostingClassifier, AdaBoostClassifier
+from sklearn.neural_network import MLPClassifier
 
 # Instanciamos la API
 app = FastAPI(title="MLOps API Gateway")
@@ -49,10 +52,27 @@ def entrenar_modelo(peticion: PeticionEntrenamiento):
     if peticion.modelo == "SVM":
         clf = SVC()
     elif peticion.modelo == "Random Forest":
-        clf = RandomForestClassifier(n_estimators=50)
-    else:
+        clf = RandomForestClassifier(n_estimators=100)
+    elif peticion.modelo == "MLP":
+        # Limitamos iteraciones para que no tarde una eternidad en la demo
+        clf = MLPClassifier(hidden_layer_sizes=(50,), max_iter=500)
+    elif peticion.modelo == "Regresión Logística":
         clf = LogisticRegression(max_iter=1000)
-        
+    elif peticion.modelo == "Árbol de Decisión":
+        from sklearn.tree import DecisionTreeClassifier
+        clf = DecisionTreeClassifier()
+    elif peticion.modelo == "Naive Bayes":
+        from sklearn.naive_bayes import GaussianNB
+        clf = GaussianNB()
+    elif peticion.modelo == "KNN":
+        clf = KNeighborsClassifier(n_neighbors=5)
+    elif peticion.modelo == "Gradient Boosting":
+        clf = GradientBoostingClassifier(n_estimators=100)
+    elif peticion.modelo == "AdaBoost":
+        clf = AdaBoostClassifier(n_estimators=50)
+    else:
+        return {"status": "ERROR", "mensaje": "Modelo no reconocido"}
+    
     # Entrenamiento Intensivo
     start = time.time()
     clf.fit(X_train, y_train)
