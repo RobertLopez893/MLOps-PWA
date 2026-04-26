@@ -44,7 +44,7 @@ Desarrollado para la materia de **Sistemas Distribuidos (7CM1)** en la **Escuela
 ### Despliegue con Docker
 1. Clona el repositorio y navega al directorio raíz del proyecto:
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
+   git clone https://github.com/RobertLopez893/MLOps-PWA
    cd MLOps-PWA-main
    ```
 2. Construye y levanta los contenedores en segundo plano:
