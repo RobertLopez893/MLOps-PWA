@@ -7,7 +7,7 @@ function App() {
   const [isTraining, setIsTraining] = useState(false);
   const [leaderboard, setLeaderboard] = useState([]);
 
-  const API_URL = 'http://127.0.0.1:8000/api';
+  const API_URL = 'http://34.69.194.205:8000/api';
 
   const fetchLeaderboard = async () => {
     try {
